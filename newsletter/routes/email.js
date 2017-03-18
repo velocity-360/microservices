@@ -15,19 +15,11 @@ var fetchFile = function(path){
 	})
 }
 
-var emails = {
-	announcement:{
-		filepath: '/public/email/newsletter/original.html',
-		subject: 'Find Your Next Job on The Varsity'
-	}
-}
 
 router.post('/:action', function(req, res, next) {
 	var action = req.params.action // newsletter, announcement, etc
 
 	if (action == 'announcement'){
-		var emailInfo = emails['announcement']
-
 		var emailrecord = null
 		var list = null
 		var confirmed = []
