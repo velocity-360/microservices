@@ -17,7 +17,7 @@ var fetchFile = function(path){
 
 var emails = {
 	announcement:{
-		filepath: 'public/email/general/product-announcement.html',
+		filepath: '/public/email/newsletter/original.html',
 		subject: 'Find Your Next Job on The Varsity'
 	}
 }
