@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        {{>head}}
+    </head>
+
+    <body>
+        
+        <div class="main-container">
+            <section class="text-center">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-sm-10 col-sm-offset-1 col-md-6 col-md-offset-3">
+
+                            <form method="post" action="/email/announcement" class="boxed boxed--lg boxed--border">
+                                <div class="col-xs-12">
+                                    <input type="text" name="emails" placeholder="Emails" />
+                                    <br /><br />
+                                    <select name="mode">
+                                        <option value="test">Test</option>
+                                        <option value="live">Live</option>
+                                    </select>
+                                    <br /><br />
+                                    <button type="submit" class="btn btn--primary type--uppercase">Send Emails</button>
+                                </div>
+                                <div class="col-xs-12">
+                                    <span class="type--fine-print">By signing up, you agree to the
+                                        <a href="#">Terms of Service</a>
+                                    </span>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+            {{>footer}}
+        </div>
+
+
+        <script type="text/javascript" src="/dist/js/vendor.min.js"></script>
+    </body>
+</html>
