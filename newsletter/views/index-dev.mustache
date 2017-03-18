@@ -14,7 +14,7 @@
 
                             <form method="post" action="/email/announcement" class="boxed boxed--lg boxed--border">
                                 <div class="col-xs-12">
-                                    <input type="text" name="emails" placeholder="Recipients" />
+                                    <input type="text" name="fromemail" placeholder="Your Email" />
                                     <br />
                                     <input type="text" name="fromname" placeholder="From Name" />
                                     <br />
@@ -26,6 +26,9 @@
                                         <option value="test">Test</option>
                                         <option value="live">Live</option>
                                     </select>
+                                    <br /><br />
+                                    <input type="text" name="emails" placeholder="Recipients" />
+                                    <br />
                                     <br /><br />
                                     <button type="submit" class="btn btn--primary type--uppercase">Send Emails</button>
                                 </div>

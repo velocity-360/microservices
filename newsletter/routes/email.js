@@ -49,7 +49,7 @@ router.post('/:action', function(req, res, next) {
 				// var encoded = Base64.encode(address)
 
 				confirmed.push(address)
-				utils.Email.sendHtmlEmail(process.env.BASE_EMAIL, req.body.fromname, address, req.body.subject, html)
+				utils.Email.sendHtmlEmail(req.body.fromemail, req.body.fromname, address, req.body.subject, html)
 			})
 
 			return (emailrecord.id == null) ? controllers.emailrecord.post(emailrecord) : emailrecord
