@@ -2,14 +2,14 @@ var Promise = require('bluebird')
 
 module.exports = {
 
-	sendEmail: function(from, recipient, subject, text){
+	sendEmail: function(from, fromname, recipient, subject, text){
 		return new Promise(function (resolve, reject){
 
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
 			sendgrid.send({
 				to:       recipient,
 				from:     from,
-				fromname: 'The Varsity',
+				fromname: fromname,
 				subject:  subject,
 				text:     text
 			}, function(err) {
@@ -22,7 +22,7 @@ module.exports = {
 		})
 	},
 
-	sendEmails: function(from, recipients, subject, text){
+	sendEmails: function(from, fromname, recipients, subject, text){
 		return new Promise(function (resolve, reject){
 
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
@@ -34,7 +34,7 @@ module.exports = {
 				sendgrid.send({
 					to:       recipient,
 					from:     from,
-					fromname: 'The Varsity',
+					fromname: fromname,
 					subject:  subject,
 					html:     text
 					//text:     text
@@ -48,14 +48,14 @@ module.exports = {
 		})
 	},	
 
-	sendHtmlEmail: function(from, recipient, subject, html){
+	sendHtmlEmail: function(from,fromname, recipient, subject, html){
 		return new Promise(function (resolve, reject){
 
 			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
 			sendgrid.send({
 				to:       recipient,
 				from:     from,
-				fromname: 'The Varsity',
+				fromname: fromname,
 				subject:  subject,
 				html:     html
 			}, function(err) {

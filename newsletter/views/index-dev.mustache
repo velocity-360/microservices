@@ -14,7 +14,13 @@
 
                             <form method="post" action="/email/announcement" class="boxed boxed--lg boxed--border">
                                 <div class="col-xs-12">
-                                    <input type="text" name="emails" placeholder="Email Addresses" />
+                                    <input type="text" name="emails" placeholder="Recipients" />
+                                    <br />
+                                    <input type="text" name="fromname" placeholder="From Name" />
+                                    <br />
+                                    <input type="text" name="subject" placeholder="Subject" />
+                                    <br />
+                                    <textarea name="content" placeholder="content"></textarea>
                                     <br /><br />
                                     <select name="mode">
                                         <option value="test">Test</option>

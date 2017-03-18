@@ -37,24 +37,19 @@ router.post('/:action', function(req, res, next) {
 		.then(function(records){
 			// console.log('RECORDS: '+JSON.stringify(records))
 			emailrecord = (records == 0) ? {sent:[]} : records[0]
-			return fetchFile(emailInfo.filepath)
-		})
-		.then(function(template){
 			var emails = req.body.emails
 			list = emails.split(',')
 			list.push('dkwon@velocity360.io')
 
 			list.forEach(function(email){
-				var html = template
-				var address = email.trim().toLowerCase()
+				var html = req.body.content
 
-				html = html.replace('{{email}}', address)
-				var encoded = Base64.encode(address)
-				for (var i=0; i<16; i++)
-					html = html.replace('{{utm}}', encoded)
+				var address = email.trim().toLowerCase()
+				// html = html.replace('{{email}}', address)
+				// var encoded = Base64.encode(address)
 
 				confirmed.push(address)
-				utils.Email.sendHtmlEmail(process.env.BASE_EMAIL, address, emailInfo.subject, html)
+				utils.Email.sendHtmlEmail(process.env.BASE_EMAIL, req.body.fromname, address, req.body.subject, html)
 			})
 
 			return (emailrecord.id == null) ? controllers.emailrecord.post(emailrecord) : emailrecord
@@ -138,14 +133,14 @@ router.get('/:action', function(req, res, next) {
 			if (unsubscribed.indexOf(email) == -1)
 				unsubscribed.push(email)
 
-			utils.Email.sendEmail(process.env.BASE_EMAIL, 'dkwon@velocity360.io', 'Unsubscribe', email+' unsubscribed')
+			utils.Email.sendEmail(process.env.BASE_EMAIL, 'Velocity 360', 'dkwon@velocity360.io', 'Unsubscribe', email+' unsubscribed')
 			res.send('You have been unsubscribed, thank you.')
 
 			return (emailrecord._id == null) ? controller.post(emailrecord) : controller.put(emailrecord._id, {unsubscribed: unsubscribed})
 		})
 		.catch(function(err){
 			console.log('ERROR: '+err)
-			utils.Email.sendEmail(process.env.BASE_EMAIL, 'dkwon@velocity360.io', 'Unsubscribe', email+' unsubscribed')
+			utils.Email.sendEmail(process.env.BASE_EMAIL, 'Velocity 360', 'dkwon@velocity360.io', 'Unsubscribe', email+' unsubscribed')
 			res.send('You have been unsubscribed, thank you.')
 		})
 
