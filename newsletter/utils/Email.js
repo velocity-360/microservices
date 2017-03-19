@@ -1,4 +1,5 @@
 var Promise = require('bluebird')
+var helper = require('sendgrid').mail
 
 module.exports = {
 
@@ -46,24 +47,49 @@ module.exports = {
 
 			resolve()
 		})
-	},	
+	},
 
-	sendHtmlEmail: function(from,fromname, recipient, subject, html){
+	sendHtmlEmail: function(from, fromname, recipient, subject, html){
 		return new Promise(function (resolve, reject){
+			var from_email = new helper.Email(from)
+			var to_email = new helper.Email(recipient)
+			var content = new helper.Content('text/html', html)
+			var mail = new helper.Mail(from_email, subject, to_email, content)
 
-			var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
-			sendgrid.send({
-				to:       recipient,
-				from:     from,
-				fromname: fromname,
-				subject:  subject,
-				html:     html
-			}, function(err) {
-				if (err) {reject(err) }
-				else { resolve() }
+			var sg = require('sendgrid')(process.env.SENDGRID_API_KEY)
+			var request = sg.emptyRequest({
+				method: 'POST',
+				path: '/v3/mail/send',
+				body: mail.toJSON()
+			})
+
+			sg.API(request, function(error, response) {
+				if (error){
+					reject(error)
+				}
+				else {
+					resolve(response)
+				}
 			})
 		})
 	}
+
+	// sendHtmlEmail: function(from,fromname, recipient, subject, html){
+	// 	return new Promise(function (resolve, reject){
+
+	// 		var sendgrid = require('sendgrid')(process.env.SENDGRID_USERNAME, process.env.SENDGRID_PASSWORD)
+	// 		sendgrid.send({
+	// 			to:       recipient,
+	// 			from:     from,
+	// 			fromname: fromname,
+	// 			subject:  subject,
+	// 			html:     html
+	// 		}, function(err) {
+	// 			if (err) {reject(err) }
+	// 			else { resolve() }
+	// 		})
+	// 	})
+	// }
 
 
 
