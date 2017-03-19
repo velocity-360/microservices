@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
     <head>
-        {{>head}}
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     </head>
 
-    <body>
+    <body style="background:#f9f9f9">
         
-        <div class="main-container">
+        <div class="container" style="padding-top:48px">
             <section class="text-center">
                 <div class="container">
                     <div class="row">
@@ -14,20 +14,20 @@
 
                             <form method="post" action="/email/announcement" class="boxed boxed--lg boxed--border">
                                 <div class="col-xs-12">
-                                    <input type="text" name="fromemail" placeholder="Your Email" />
+                                    <input type="text" class="form-control" name="fromemail" placeholder="Your Email" />
                                     <br />
-                                    <input type="text" name="fromname" placeholder="From Name" />
+                                    <input type="text" class="form-control" name="fromname" placeholder="From Name" />
                                     <br />
-                                    <input type="text" name="subject" placeholder="Subject" />
+                                    <input type="text" class="form-control" name="subject" placeholder="Subject" />
                                     <br />
-                                    <textarea name="content" placeholder="content"></textarea>
+                                    <textarea name="content" class="form-control" placeholder="content"></textarea>
                                     <br /><br />
-                                    <select name="mode">
+                                    <select class="form-control" name="mode">
                                         <option value="test">Test</option>
                                         <option value="live">Live</option>
                                     </select>
                                     <br /><br />
-                                    <input type="text" name="emails" placeholder="Recipients" />
+                                    <input type="text" class="form-control" name="emails" placeholder="Recipients" />
                                     <br />
                                     <br /><br />
                                     <button type="submit" class="btn btn--primary type--uppercase">Send Emails</button>
@@ -44,7 +44,6 @@
                     </div>
                 </div>
             </section>
-
 
             {{>footer}}
         </div>
